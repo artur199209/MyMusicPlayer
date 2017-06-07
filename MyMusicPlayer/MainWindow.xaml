@@ -1,0 +1,160 @@
+﻿<Window x:Class="MyMusicPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MyMusicPlayer.Properties"  
+        Title="{x:Static local:Resources.MyMysicPlayerName}"
+        Height="680" Width="950"
+        xmlns:Views="clr-namespace:MyMusicPlayer.Views"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MyMusicPlayer;component/Views/PlayListView.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <VisualBrush x:Key="AddBtn"
+                     Stretch="Fill"
+                    Visual="{StaticResource addBtn}"/>
+            <VisualBrush x:Key="RemoveBtn"
+                     Stretch="Fill"
+                    Visual="{StaticResource removeBtn}"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="410" />
+            <ColumnDefinition Width="460" />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="290" />
+            <RowDefinition Height="70" />
+            <RowDefinition Height="240" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" x:Name="songNameLabel">
+            <Label Content="Najpiękniejsza piosenka" 
+                   HorizontalAlignment="Center"
+                   Foreground="{StaticResource SemiTextColorBrush2}"/>
+        </Grid>
+
+        <Grid Grid.Row="1" x:Name="controlGrid"
+                              Grid.Column="0"
+                              Grid.ColumnSpan="1"
+                              Margin="5">
+            <Views:PlayControlView x:Name="playControlView" HorizontalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Row="1" x:Name="equalizer"
+                              Grid.Column="1"
+                              Grid.ColumnSpan="2"
+                              Margin="5">
+            <Views:Equalizer x:Name="playControlView3" HorizontalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Button Command="{Binding AddSongCommand, Mode=OneWay}"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource MetroCircleButtonStyle}"
+                    Height="60"
+                    Width="60"
+                    Content="{Binding Mode=OneWay}" Margin="5,0,346,10">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <Rectangle x:Name="iconRect"
+                                   Width="18"
+                                   Height="20"
+                                   Margin="0,0,0,0"
+                                   Fill="{StaticResource AddBtn}" />
+                    </DataTemplate>
+                </Button.ContentTemplate>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static local:Resources.AddSongsTooltip}"/>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Button Command="{Binding RemoveSongCommand, Mode=OneWay}"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource MetroCircleButtonStyle}"
+                    Height="60"
+                    Width="60"
+                    Content="{Binding Mode=OneWay}" Margin="64,0,287,10">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <Rectangle x:Name="iconRect"
+                                   Width="18"
+                                   Height="20"
+                                   Margin="0,0,0,0"
+                                   Fill="{StaticResource RemoveBtn}">
+                            <Rectangle.RenderTransform>
+                                <RotateTransform CenterX="10" CenterY="10" Angle="90" />
+                            </Rectangle.RenderTransform>
+                        </Rectangle>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static local:Resources.RemoveSelectedSongsTooltip}"/>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Button Command="{Binding SavePlayListInFileCommand, Mode=OneWay}"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource MetroCircleButtonStyle}"
+                    Height="60"
+                    Width="60"
+                    Content="Save" Margin="125,0,226,10">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static local:Resources.SavePlayListInFile}"/>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Button Command="{Binding LoadPlayListInFileCommand, Mode=OneWay}"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource MetroCircleButtonStyle}"
+                    Height="60"
+                    Width="60"
+                    Content="Load" Margin="187,0,164,10">
+                <Button.ToolTip>
+                    <ToolTip>
+                        <StackPanel>
+                            <TextBlock FontWeight="Bold" Text="{x:Static local:Resources.LoadPlayListFromFile}"/>
+                        </StackPanel>
+                    </ToolTip>
+                </Button.ToolTip>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" Margin="0,0,0,0">
+            <ListBox Margin="0,0,0,0" Name="playlistLstBox"
+                 ItemsSource="{Binding ListBoxItems}"
+                 ItemTemplate="{StaticResource PlayListTemplate}"
+                 SelectionMode="Extended"
+                 SelectionChanged="playlistLstBox_SelectionChanged"
+                 ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                 ScrollViewer.VerticalScrollBarVisibility="Visible">
+            </ListBox>
+        </Grid>
+
+    </Grid>
+
+</Window>

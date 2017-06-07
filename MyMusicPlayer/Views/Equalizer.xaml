@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="MyMusicPlayer.Views.Equalizer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:p="clr-namespace:MyMusicPlayer.Properties"
+             DataContext="clr-namespace:MyMusicPlayer.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="270" d:DesignWidth="500">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MyMusicPlayer;component/Resources/CustomSlider.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="42" />
+            <ColumnDefinition Width="42" />
+            <ColumnDefinition Width="42" />
+            <ColumnDefinition Width="42" />
+            <ColumnDefinition Width="42" />
+            <ColumnDefinition Width="42" />
+            <ColumnDefinition Width="42" />
+            <ColumnDefinition Width="42" />
+            <ColumnDefinition Width="42" />
+            <ColumnDefinition Width="42" />
+            <ColumnDefinition Width="42" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="90" />
+        </Grid.RowDefinitions>
+
+        <Slider Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" Style="{StaticResource BaseMetroSlider}" Value="{Binding Slider32HzValue, Mode=TwoWay}"></Slider>
+        <Slider Grid.Row="0" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" Style="{StaticResource BaseMetroSlider}" Value="{Binding Slider64HzValue, Mode=TwoWay}"></Slider>
+        <Slider Grid.Row="0" Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" Style="{StaticResource BaseMetroSlider}" Value="{Binding Slider125HzValue, Mode=TwoWay}"></Slider>
+        <Slider Grid.Row="0" Grid.Column="3" Orientation="Vertical" HorizontalAlignment="Center" Style="{StaticResource BaseMetroSlider}" Value="{Binding Slider250HzValue, Mode=TwoWay}"></Slider>
+        <Slider Grid.Row="0" Grid.Column="4" Orientation="Vertical" HorizontalAlignment="Center" Style="{StaticResource BaseMetroSlider}" Value="{Binding Slider500HzValue, Mode=TwoWay}"></Slider>
+        <Slider Grid.Row="0" Grid.Column="5" Orientation="Vertical" HorizontalAlignment="Center" Style="{StaticResource BaseMetroSlider}" Value="{Binding Slider1kHzValue, Mode=TwoWay}"></Slider>
+        <Slider Grid.Row="0" Grid.Column="6" Orientation="Vertical" HorizontalAlignment="Center" Style="{StaticResource BaseMetroSlider}" Value="{Binding Slider2kHzValue, Mode=TwoWay}"></Slider>
+        <Slider Grid.Row="0" Grid.Column="7" Orientation="Vertical" HorizontalAlignment="Center" Style="{StaticResource BaseMetroSlider}" Value="{Binding Slider4kHzValue, Mode=TwoWay}"></Slider>
+        <Slider Grid.Row="0" Grid.Column="8" Orientation="Vertical" HorizontalAlignment="Center" Style="{StaticResource BaseMetroSlider}" Value="{Binding Slider8kHzValue, Mode=TwoWay}"></Slider>
+        <Slider Grid.Row="0" Grid.Column="9" Orientation="Vertical" HorizontalAlignment="Center" Style="{StaticResource BaseMetroSlider}" Value="{Binding Slider16kHzValue, Mode=TwoWay}"></Slider>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="32 Hz" Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="{StaticResource SemiTextColorBrush2}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="64 Hz" Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="{StaticResource SemiTextColorBrush2}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="125 Hz" Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="{StaticResource SemiTextColorBrush2}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="3" Text="250 Hz" Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="{StaticResource SemiTextColorBrush2}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="4" Text="500 Hz" Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="{StaticResource SemiTextColorBrush2}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="5" Text="1 kHz" Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="{StaticResource SemiTextColorBrush2}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="6" Text="2 kHz" Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="{StaticResource SemiTextColorBrush2}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="7" Text="4 kHz" Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="{StaticResource SemiTextColorBrush2}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="8" Text="8 kHz" Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="{StaticResource SemiTextColorBrush2}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="9" Text="16 kHz" Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="{StaticResource SemiTextColorBrush2}"></TextBlock>
+
+        <Button Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Height="30" Content="{x:Static p:Resources.ResetSettings}" Margin="0,5,2,51" Command="{Binding ResetSlidersValuesCommand}"/>
+        <Button Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="3" Height="30" Content="{x:Static p:Resources.SetSettings}" Margin="0,5,2,51" Command="{Binding SaveSlidersValuesCommand}"/>
+    </Grid>
+</UserControl>
