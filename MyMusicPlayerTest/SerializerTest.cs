@@ -19,7 +19,7 @@ namespace MyMusicPlayerTest
         [TestMethod]
         public void SerializeSongPathToFileTest()
         {
-            Serializer serializer = new Serializer();
+            var serializer = new Serializer();
             serializer.SerializeSongPathToFile(songPathList);
             string directoryPath = Path.GetDirectoryName(serializer.exePath);
             var IsFileExists = File.Exists(directoryPath + serializer.fileName);
@@ -29,7 +29,7 @@ namespace MyMusicPlayerTest
         [TestMethod]
         public void DeserializeSongPathToFileTest()
         {
-            Serializer serializer = new Serializer();
+            var serializer = new Serializer();
             var result = serializer.DeserializeFromFile("\\file2.xml");
             Assert.IsNotNull(result);
         }

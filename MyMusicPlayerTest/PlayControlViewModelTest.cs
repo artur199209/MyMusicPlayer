@@ -12,13 +12,13 @@ namespace MyMusicPlayerTest
     [TestClass]
 	public class PlayControlViewModelTest
 	{
-		PlayControlViewModel playControlViewModel = new PlayControlViewModel();
-		string path = @"C:\Users\Artur\Downloads\Enrique Iglesias-Yo Sin Ti Official Audio.mp3";
+		private string path = @"C:\Users\Artur\Downloads\Enrique Iglesias-Yo Sin Ti Official Audio.mp3";
 
 		[TestMethod]
 		public void RepeatSongTest()
 		{
-			Assert.IsFalse(playControlViewModel.IsRepeatSong);
+            var playControlViewModel = new PlayControlViewModel();
+            Assert.IsFalse(playControlViewModel.IsRepeatSong);
             playControlViewModel.RepeatSongCommand.Execute(new object());
 			Assert.IsTrue(playControlViewModel.IsRepeatSong);
             playControlViewModel.RepeatSongCommand.Execute(new object());
@@ -28,7 +28,8 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void RandomSongTest()
 		{
-			Assert.IsFalse(playControlViewModel.IsRandomSong);
+            var playControlViewModel = new PlayControlViewModel();
+            Assert.IsFalse(playControlViewModel.IsRandomSong);
             playControlViewModel.RandomSongCommand.Execute(new object());
 			Assert.IsTrue(playControlViewModel.IsRandomSong);
 			playControlViewModel.RandomSongCommand.Execute(new object());
@@ -49,7 +50,8 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void PlayOrPauseSongTest()
 		{
-			Assert.AreEqual(0, PlayListViewModel.ListBoxItems.Count);
+            var playControlViewModel = new PlayControlViewModel();
+            Assert.AreEqual(0, PlayListViewModel.ListBoxItems.Count);
 			playControlViewModel.PlaySongCommand.Execute(new object());
 			Assert.AreEqual(false, playControlViewModel.IsPlay);
 			PlayListModel playListModel = new PlayListModel();
@@ -63,7 +65,8 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void StopSongTest()
 		{
-			Assert.IsFalse(playControlViewModel.IsPlay);
+            var playControlViewModel = new PlayControlViewModel();
+            Assert.IsFalse(playControlViewModel.IsPlay);
             playControlViewModel.StopSongCommand.Execute(new object());
             Assert.IsFalse(playControlViewModel.IsPlay);
 			Assert.IsTrue(playControlViewModel.IsStop);
@@ -74,7 +77,8 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void SetMediaPlayerVolumeTest()
 		{
-			Assert.AreEqual(100, playControlViewModel.SliderVolumeValue);
+            var playControlViewModel = new PlayControlViewModel();
+            Assert.AreEqual(100, playControlViewModel.SliderVolumeValue);
 			playControlViewModel.SetMediaPlayerVolume(70);
 			Assert.AreEqual(70, playControlViewModel.SliderVolumeValue);
 			Assert.AreEqual(70, playControlViewModel.mediaPlayer.Volume * 100);
@@ -83,14 +87,16 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void VolumeMaxCommandTest()
 		{
-			playControlViewModel.VolumeMaxCommand.Execute(new object());
+            var playControlViewModel = new PlayControlViewModel();
+            playControlViewModel.VolumeMaxCommand.Execute(new object());
 			Assert.AreEqual(100, playControlViewModel.SliderVolumeValue);
 		}
 
 		[TestMethod]
 		public void VolumeMuteCommandTest()
 		{
-			playControlViewModel.VolumeMuteCommand.Execute(new object());
+            var playControlViewModel = new PlayControlViewModel();
+            playControlViewModel.VolumeMuteCommand.Execute(new object());
 			Assert.AreEqual(0, playControlViewModel.SliderVolumeValue);
 			Assert.AreEqual(0, playControlViewModel.mediaPlayer.Volume);
 		}
@@ -98,7 +104,7 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void GetSongSecondsCountTest()
 		{
-            PlayControlViewModel playControlViewModel = new PlayControlViewModel();
+            var playControlViewModel = new PlayControlViewModel();
 			Assert.AreEqual(0, playControlViewModel.GetSongSecondsCount());
 			playControlViewModel.mediaPlayer.Open(new Uri(path));
 			Thread.Sleep(200);
@@ -110,7 +116,7 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void GetActualSongSecondTest()
 		{
-			PlayControlViewModel playControlViewModel = new PlayControlViewModel();
+			var playControlViewModel = new PlayControlViewModel();
 			playControlViewModel.mediaPlayer.Open(new Uri(path));
 			Assert.AreEqual(0, playControlViewModel.GetActualSongSecond());
 			playControlViewModel.mediaPlayer.Position = TimeSpan.FromSeconds(50);
@@ -120,7 +126,7 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void CalculateSliderValueTest()
 		{
-			PlayControlViewModel playControlViewModel = new PlayControlViewModel();
+			var playControlViewModel = new PlayControlViewModel();
 			Assert.AreEqual(0, playControlViewModel.CalculateSliderValue());
 			playControlViewModel.mediaPlayer.Open(new Uri(path));
 			Thread.Sleep(200);
@@ -132,7 +138,7 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void SetMediaPlayerSongPositionTest()
 		{
-			PlayControlViewModel playControlViewModel = new PlayControlViewModel();
+			var playControlViewModel = new PlayControlViewModel();
 			playControlViewModel.mediaPlayer.Open(new Uri(path));
 			Thread.Sleep(200);
 			playControlViewModel.SliderDurationValue = 0;
@@ -146,7 +152,7 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void PlaySongWithITest()
 		{
-			PlayControlViewModel playControlViewModel = new PlayControlViewModel();
+			var playControlViewModel = new PlayControlViewModel();
 			playControlViewModel.mediaPlayer.Open(null);
 			Assert.IsNull(playControlViewModel.mediaPlayer.Source);
 			playControlViewModel.PlaySongWithSpecificIndex(0);
@@ -160,7 +166,7 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void PlaySongTest()
 		{
-			PlayControlViewModel playControlViewModel = new PlayControlViewModel();
+			var playControlViewModel = new PlayControlViewModel();
 			playControlViewModel.mediaPlayer.Open(null);
             Assert.AreEqual("00:00", playControlViewModel.ElapsedTimeMP3);
             playControlViewModel.PlaySong();
@@ -175,7 +181,7 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void PlayPreviousSongTest()
 		{
-			PlayControlViewModel playControlViewModel = new PlayControlViewModel();
+			var playControlViewModel = new PlayControlViewModel();
 			PlayListModel playListModel = new PlayListModel();
 			playListModel.SongPath = path;
 			PlayListViewModel.ListBoxItems.Add(playListModel);
@@ -187,7 +193,7 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void PlayNextSongTest()
 		{
-			PlayControlViewModel playControlViewModel = new PlayControlViewModel();
+			var playControlViewModel = new PlayControlViewModel();
 			PlayListModel playListModel = new PlayListModel();
 			playListModel.SongPath = path;
 			PlayListViewModel.ListBoxItems.Clear();
@@ -204,7 +210,8 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void PlayNextSongAfterPreviousTest()
 		{
-			playControlViewModel.IsRepeatSong = false;
+            var playControlViewModel = new PlayControlViewModel();
+            playControlViewModel.IsRepeatSong = false;
 			playControlViewModel.index = 0;
 			playControlViewModel.PlayNextSongAfterPrevious();
 			Assert.AreEqual(1, playControlViewModel.index);
@@ -213,6 +220,7 @@ namespace MyMusicPlayerTest
         [TestMethod]
         public void SaveVolumeSettingTest()
         {
+            var playControlViewModel = new PlayControlViewModel();
             var appConfig = new AppConfiguration();
             playControlViewModel.SaveVolumeSetting(60);
             Assert.AreEqual(60, appConfig.ReadSetting("Volume"));

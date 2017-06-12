@@ -17,8 +17,10 @@ namespace MyMusicPlayerTest
 		[TestMethod]
 		public void GetIndexOfCharacterTest()
 		{
-			Assert.AreEqual(41, SongInfo.GetIndexOfCharacter(path));
-			Assert.AreEqual(-1, SongInfo.GetIndexOfCharacter(path2));
+            var result = SongInfo.GetIndexOfCharacter(path);
+			Assert.AreEqual(41, result);
+            result = SongInfo.GetIndexOfCharacter(path2);
+            Assert.AreEqual(-1, result);
 		}
 
 		[TestMethod]

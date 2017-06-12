@@ -2,6 +2,7 @@
 using System;
 using System.Windows.Media;
 using MyMusicPlayer.Models;
+using System.IO;
 
 namespace MyMusicPlayer.ViewModels
 {
@@ -305,7 +306,7 @@ namespace MyMusicPlayer.ViewModels
 		public void PlaySongWithSpecificIndex(int index)
 		{
 			var nextSong = playListViewModel.GetNextSongPath(index);
-			if (nextSong != null)
+			if (nextSong != null && File.Exists(nextSong))
 			{
 				mediaPlayer.Open(new Uri(nextSong));
 				mediaPlayer.Play();
@@ -313,6 +314,10 @@ namespace MyMusicPlayer.ViewModels
 				IsStop = false;
 				DurationMP3 = SongInfo.GetDurationSong(nextSong);
 			}
+            else
+            {
+                StopSong();
+            }
 		}
 
 		public void PauseSong()
@@ -384,11 +389,12 @@ namespace MyMusicPlayer.ViewModels
 
 		public void StopSong()
 		{
+            SliderDurationValue = 0;
+            mediaPlayer.Close();
 			mediaPlayer.Stop();
 			IsPlay = false;
 			IsStop = true;
 			DurationMP3 = "00:00";
-			SliderDurationValue = 0;
 		}
 	}
 }

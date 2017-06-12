@@ -13,6 +13,8 @@ namespace MyMusicPlayer.Views
 	/// </summary>
 	public partial class PlayControlView : UserControl
 	{
+
+
 		private PlayControlViewModel playControlViewModel;
 		private Timer timer;
 		private string time = "00:00";
@@ -78,7 +80,7 @@ namespace MyMusicPlayer.Views
 					durationSlider.Value = x;
 				}, 0);
 			}
-			MessageBox.Show("DSADAS");
+
 			playControlViewModel.PlayNextSongAfterPrevious();
 			timer.Start();
 		}

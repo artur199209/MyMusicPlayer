@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using MyMusicPlayer.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace MyMusicPlayer.ViewModels
 {
@@ -59,7 +60,7 @@ namespace MyMusicPlayer.ViewModels
 
         public void LoadPlayListFromFile()
         {
-            Serializer serializer = new Serializer();
+            var serializer = new Serializer();
             var pathList = serializer.DeserializeFromFile();
 
             foreach (var item in pathList)
@@ -83,7 +84,7 @@ namespace MyMusicPlayer.ViewModels
 
         public void SaveListToFile()
         {
-            Serializer serializer = new Serializer();
+            var serializer = new Serializer();
             var lista = new List<string>();
 
             foreach (var item in ListBoxItems)
@@ -168,17 +169,33 @@ namespace MyMusicPlayer.ViewModels
 
 		public string GetNextSongPath(int index)
 		{
-			if (index >= listBoxItems.Count || index < 0)
-			{
-				index = 0;
-			}
-			
-			if (listBoxItems.Count == 0)
-			{
-				return null;
-			}
+            bool isNextSong = false;
+            string song = string.Empty;
+
+            while (!isNextSong)
+            {
+                if (index >= listBoxItems.Count || index < 0)
+                {
+                    index = 0;
+                }
+
+                if (listBoxItems.Count == 0)
+                {
+                    return null;
+                }
+
+                if (File.Exists(listBoxItems[index].SongPath))
+                {
+                    song = listBoxItems[index].SongPath.ToString();
+                    isNextSong = true;
+                }
+                else
+                {
+                    listBoxItems.RemoveAt(index);
+                }
+            }
 	
-			return listBoxItems[index].SongPath.ToString();
+			return song;
 		}
 	}
 }

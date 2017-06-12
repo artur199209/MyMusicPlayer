@@ -1,18 +1,16 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyMusicPlayer.ViewModels;
-using System.Windows;
 using MyMusicPlayer.Models;
 using System.Collections.Generic;
 using System.IO;
 
 namespace MyMusicPlayerTest
 {
-	[TestClass]
+    [TestClass]
 	public class PlayListViewModelTest
 	{
 		private readonly string path = @"C:\Users\Artur\Downloads\Enrique Iglesias-Yo Sin Ti Official Audio.mp3";
-		PlayListViewModel playListViewModel = new PlayListViewModel();
+        PlayListViewModel playListViewModel = new PlayListViewModel();
 
 		private void InitCollections()
 		{

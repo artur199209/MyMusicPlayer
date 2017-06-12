@@ -1,10 +1,9 @@
 ﻿using MyMusicPlayer.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MyMusicPlayer.ViewModels;
 
 namespace MyMusicPlayerTest
-{	
-	[TestClass]
+{
+    [TestClass]
 	public class RandomGeneratorTest
 	{
 

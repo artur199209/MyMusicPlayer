@@ -1,18 +1,15 @@
-﻿using System;
-using System.Configuration;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyMusicPlayer.Models;
-using MyMusicPlayer.Properties;
 
 namespace MyMusicPlayerTest
 {
-	[TestClass]
+    [TestClass]
 	public class AppConfigurationTest
 	{
 		[TestMethod]
 		public void ReadSettingTest()
 		{
-			AppConfiguration appConfig = new AppConfiguration();
+			var appConfig = new AppConfiguration();
 			appConfig.AddOrUpdateAppSettings("Slider33Hz", "50");
 			double actualValue = appConfig.ReadSetting("Slider33Hz");
 			Assert.AreEqual(50, actualValue);
